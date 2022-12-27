@@ -24,4 +24,4 @@ public:
     }
 };
 
-//Leet code solution
+//Leet code solution of permutations
