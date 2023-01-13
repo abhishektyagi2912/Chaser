@@ -1,3 +1,4 @@
+// in this code all deleteion, insertion are held
 #include <iostream>
 using namespace std;
 
@@ -49,6 +50,7 @@ void insertatposition(node *&tail, node *&head, int pos, int d)
     if (temp->next == NULL)
     {
         insertattail(tail, d);
+        return;
     }
     // create a new node for d
     node *nodetoinsert = new node(d);
