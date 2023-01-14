@@ -90,6 +90,41 @@ void insertatposition(node *&head, node *&tail, int pos, int d)
     temp->next = nodetoinsert;
     nodetoinsert->prev = temp;
 }
+void deletenode(node *&head, node *&tail, int pos)
+{
+    // head
+    if (pos == 1)
+    {
+        node *temp = head;
+        temp->next->prev = NULL;
+        head = temp->next;
+        temp->next = NULL;
+        delete temp;
+    }
+    else
+    {
+        node *prev = NULL;
+        node *curr = head;
+
+        int cnt = 1;
+        while (cnt < pos)
+        {
+            prev = curr;
+            curr = curr->next;
+            cnt++;
+        }
+        curr->prev = NULL;
+        prev->next = curr->next;
+        curr->next = NULL; // to delte this node
+        delete curr;
+
+        // place tail at rigth position
+        if (prev->next == NULL)
+        {
+            tail = prev;
+        }
+    }
+}
 
 // give length of linked list
 int getlength(node *head)
@@ -123,6 +158,15 @@ int main()
     insertatposition(head, tail, 3, 12);
     print(head);
     cout << "Length of the LL is " << getlength(head) << endl;
+
+    deletenode(head,tail,3);
+    print(head);
+
+    deletenode(head,tail,1);
+    print(head);
+
+    cout<<"head "<< head->data<<endl;
+    cout<<"tail "<< tail->data<<endl;
 
     return 0;
 }

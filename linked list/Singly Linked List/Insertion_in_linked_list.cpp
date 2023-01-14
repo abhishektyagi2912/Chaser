@@ -18,6 +18,7 @@ public:
 
 void insertathead(node *&head, int d)
 {
+    // if the starting point is zero then we applay if condition see in doubly linked list
     node *temp = new node(d); // create new node which name is temp
     temp->next = head;
     head = temp;
@@ -25,6 +26,7 @@ void insertathead(node *&head, int d)
 
 void insertattail(node *&tail, int d)
 {
+    // if the starting point is zero then we applay if condition see in doubly linked list
     node *temp = new node(d);
     tail->next = temp;
     tail = tail->next;
@@ -38,6 +40,7 @@ void insertatposition(node *&tail, node *&head, int pos, int d)
         insertathead(head, d);
         return;
     }
+    // here we mark temp is head 
     node *temp = head;
     int count = 1;
     while (count < pos - 1)
