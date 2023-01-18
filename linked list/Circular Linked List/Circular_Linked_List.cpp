@@ -48,6 +48,38 @@ void insertelement(node *&tail, int element, int d)
     }
 }
 
+// value is for compare the element
+void deletenode(node *&tail, int value)
+{
+    if (tail == NULL)
+    {
+        // empty case
+        cout << "List Is Empty" << endl;
+        return;
+    }
+    else
+    {
+        // non-empty case
+        // assume the value is presnet in CLL
+        node *prev = tail;
+        node *curr = prev->next;
+
+        while (curr->data != value)
+        {
+            prev = curr;
+            curr = curr->next;
+        }
+
+        prev->next = curr->next;
+        // this is because this give segmentation fault
+        if(tail == curr){
+            tail = prev;
+        }
+        curr->next = NULL;
+        delete curr;
+    }
+}
+
 void print(node *tail)
 {
     node *temp = tail;
@@ -70,9 +102,14 @@ int main()
 
     // empty list m enter kr rhe ho tb
     insertelement(tail, 0, 4);
+    insertelement(tail, 4, 5);
     print(tail);
 
-    insertelement(tail, 4, 5);
+    insertelement(tail, 5, 6);
+    insertelement(tail, 6, 7);
+    print(tail);
+
+    deletenode(tail , 5);
     print(tail);
 
     return 0;
