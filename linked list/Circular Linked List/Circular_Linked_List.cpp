@@ -71,8 +71,14 @@ void deletenode(node *&tail, int value)
         }
 
         prev->next = curr->next;
+        // if their is one node
+        if (curr == prev)
+        {
+            tail = NULL;
+        }
         // this is because this give segmentation fault
-        if(tail == curr){
+        if (tail == curr)
+        {
             tail = prev;
         }
         curr->next = NULL;
@@ -83,7 +89,12 @@ void deletenode(node *&tail, int value)
 void print(node *tail)
 {
     node *temp = tail;
-
+    if (tail == NULL)
+    {
+        // empty case
+        cout << "List Is Empty" << endl;
+        return;
+    }
     // in while loop loop we cant print the data if we have only one tail or node so
     // cout << temp->data << "->";
     // or we can use do while loop here
@@ -109,7 +120,7 @@ int main()
     insertelement(tail, 6, 7);
     print(tail);
 
-    deletenode(tail , 5);
+    deletenode(tail, 5);
     print(tail);
 
     return 0;
