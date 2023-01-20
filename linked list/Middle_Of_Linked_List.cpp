@@ -32,7 +32,39 @@ void print(node *head)
     cout << "NULL" << endl;
 }
 
+int getlength(node *head)
+{
+    int cnt = 0;
+    while (head != NULL)
+    {
+        head = head->next;
+        cnt++;
+    }
+    return cnt;
+}
+// this give index of midddle element
+// int middle(node*head){
+//     int len = getlength(head);
+//     int ans = (len/2)+1;
+//     return ans;
+// }
+node *middle(node *head)
+{
+    int len = getlength(head);
+    int ans = (len / 2);
+    node *temp = head;
+    int cnt =0;
+    while(cnt<ans)
+    {
+        temp = temp->next;
+        cnt++;
+    }
+    return temp;
+}
 
+// int middle(node *head)
+// {
+// }
 int main()
 {
     node *node1 = new node(10);
@@ -42,6 +74,8 @@ int main()
     insertathead(head, 40);
     insertathead(head, 30);
     print(head);
+    // int a= middle(head);
+    // cout << a;
 
     return 0;
 }
