@@ -14,14 +14,14 @@ public:
         this->next = NULL;
     }
 };
-void insert(node *head, int d)
+void insert(node *&head, int d)
 {
     node *temp = new node(d); // create new node which name is temp
     temp->next = head;
     head = temp;
 }
 
-void reverse(node *&head)
+void reverses(node *&head)
 {
     node *prev = NULL;
     node *curr = head;
@@ -34,6 +34,19 @@ void reverse(node *&head)
         prev = curr;
     }
 }
+// anothe way
+node *reverse(node *head)
+{
+    if (head == NULL || head->next == NULL)
+        return head;
+
+    node *rest = reverse(head->next);
+    head->next->next = head;
+    head->next = NULL;
+
+    return rest;
+}
+
 void print(node *head)
 {
     node *temp = head;
@@ -52,7 +65,10 @@ int main()
     insert(head, 4);
     insert(head, 5);
     insert(head, 6);
-    reverse(head);
+    print(head);
+    head = reverse(head); // this is the way recursion function works
+    print(head);
+    reverses(head);
     print(head);
     return 0;
 }
