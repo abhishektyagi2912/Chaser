@@ -40,7 +40,7 @@ void insertatposition(node *&tail, node *&head, int pos, int d)
         insertathead(head, d);
         return;
     }
-    // here we mark temp is head 
+    // here we mark temp is head
     node *temp = head;
     int count = 1;
     while (count < pos - 1)
