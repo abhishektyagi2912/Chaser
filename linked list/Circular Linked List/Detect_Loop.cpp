@@ -87,22 +87,23 @@ bool checkcircular(node *head)
         return true;
 }
 
-bool floydcycle(node *head)
+node* floydcycle(node *head)
 {
     if (head == NULL)
     {
         return NULL;
     }
 
-    node *fast, *slow = head;
+    node *fast = head;
+    node *slow = head;
     while (fast != NULL && fast->next != NULL)
     {
         fast = fast->next->next;
         slow = slow->next;
         if (slow == fast)
-            return true;
+            return slow;
     }
-    return false;
+    return NULL;
 }
 int main()
 {
@@ -126,13 +127,14 @@ int main()
     // }
     // else
     //     "NO"; // return one or zero bool
+    //  cout << (checkcircular); // return one or zero bool
 
-    if (floydcycle)
+
+    if (floydcycle(tail)!=NULL)
     {
         cout << "Yes" << endl;
     }
     else
         "NO";
-    cout << (checkcircular); // return one or zero bool
     return 0;
 }
