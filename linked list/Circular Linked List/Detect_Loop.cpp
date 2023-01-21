@@ -107,6 +107,7 @@ node* floydcycle(node *head)
 }
 int main()
 {
+    
     node *tail = NULL;
 
     // empty list m enter kr rhe ho tb
