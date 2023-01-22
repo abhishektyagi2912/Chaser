@@ -87,7 +87,7 @@ bool checkcircular(node *head)
         return true;
 }
 
-node* floydcycle(node *head)
+node *floydcycle(node *head)
 {
     if (head == NULL)
     {
@@ -105,9 +105,41 @@ node* floydcycle(node *head)
     }
     return NULL;
 }
+// use to dletele loop
+node *getstartingnode(node *head)
+{
+    if (head == NULL)
+    {
+        return NULL;
+    }
+    node *intersection = floydcycle(head);
+    node *slow = head;
+    while (slow != intersection)
+    {
+        slow = slow->next;
+        intersection = intersection->next;
+    }
+    return slow;
+}
+
+void deleteloop(node *head)
+{
+    if (head == NULL)
+    {
+        return;
+    }
+    node *startloop = getstartingnode(head);
+    // startloop give intersection poiint so we start the function and move one by one if same element
+    node *temp = startloop;
+    while (temp->next != startloop)
+    {
+        temp = temp->next;
+    }
+    temp->next = NULL;
+}
 int main()
 {
-    
+
     node *tail = NULL;
 
     // empty list m enter kr rhe ho tb
@@ -130,12 +162,19 @@ int main()
     //     "NO"; // return one or zero bool
     //  cout << (checkcircular); // return one or zero bool
 
-
-    if (floydcycle(tail)!=NULL)
+    if (floydcycle(tail) != NULL)
     {
         cout << "Yes" << endl;
     }
     else
         "NO";
+
+    node *loop = getstartingnode(tail);
+    cout << "loop starts at " << loop->data << endl;
+
+    deleteloop(tail);
+    print(tail);
+
+    
     return 0;
 }
