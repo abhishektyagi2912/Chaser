@@ -74,6 +74,38 @@ void levelOrderTraversal(node *root)
     }
 }
 
+void inorder(node *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    inorder(root->left);
+    cout << root->data << " ";
+    inorder(root->right);
+}
+
+void preorder(node *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    cout << root->data << " ";
+    preorder(root->left);
+    preorder(root->right);
+}
+void postorder(node *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    postorder(root->left);
+    postorder(root->right);
+    cout << root->data << " ";
+}
+
 int main()
 {
     node *root = NULL;
@@ -83,6 +115,13 @@ int main()
     // 1 3 7 -1 -1 11 -1 -1 5 17 -1 -1 -1
 
     levelOrderTraversal(root);
+    cout << "Inorder Traversal" << endl;
+    inorder(root);
+
+    cout << "Preorder Traversal" << endl;
+    preorder(root);
+    cout << "Postorder Traversal" << endl;
+    postorder(root);
 
     return 0;
 }
