@@ -11,8 +11,8 @@ public:
 
     node(int d)
     {
-        this->data = data;
-        this->left = NULL; // this is binary trre that has one node in starting
+        this->data = d;
+        this->left = NULL;
         this->right = NULL;
     }
 };
@@ -20,42 +20,56 @@ public:
 node *buildTree(node *root)
 {
 
-    cout << "Enter the data " << endl;
+    cout << "Enter the data: " << endl;
     int data;
     cin >> data;
     root = new node(data);
 
-    if (data == -1) // to destroy the data mtlb end krne k liye node ko
+    if (data == -1)
     {
         return NULL;
     }
 
-    cout << "enter data for inserting at left" << endl;
+    cout << "Enter data for inserting in left of " << data << endl;
     root->left = buildTree(root->left);
-    cout << "enter data for inserting at right" << endl;
+    cout << "Enter data for inserting in right of " << data << endl;
     root->right = buildTree(root->right);
-
     return root;
 }
 
-void linearOrderTraversal(node *root)
+void levelOrderTraversal(node *root)
 {
-    queue<node*> q;
+    queue<node *> q;
     q.push(root);
+    q.push(NULL);
 
     while (!q.empty())
     {
-        node* temp = q.front();
-        cout << temp->data << " ";
+        node *temp = q.front();
         q.pop();
 
-        if (temp -> left)
+        if (temp == NULL)
         {
-            q.push(temp->left);
+            // purana level complete traverse ho chuka hai
+            cout << endl;
+            if (!q.empty())
+            {
+                // queue still has some child ndoes
+                q.push(NULL);
+            }
         }
-        if (temp-> right)
+        else
         {
-            q.push(temp->right);
+            cout << temp->data << " ";
+            if (temp->left)
+            {
+                q.push(temp->left);
+            }
+
+            if (temp->right)
+            {
+                q.push(temp->right);
+            }
         }
     }
 }
@@ -68,7 +82,7 @@ int main()
 
     // 1 3 7 -1 -1 11 -1 -1 5 17 -1 -1 -1
 
-    linearOrderTraversal(root);
+    levelOrderTraversal(root);
 
     return 0;
 }
