@@ -41,7 +41,7 @@ void levelOrderTraversal(node *root)
 {
     queue<node *> q;
     q.push(root);
-    q.push(NULL);
+    q.push(NULL); // because root node has only one node [root,NULL] are their
 
     while (!q.empty())
     {
