@@ -41,7 +41,7 @@ void takeinput(node *&root)
     cin >> data;
     while (data != -1)
     {
-        insertBst(root, data);
+        root = insertBst(root, data);
         cin >> data;
     }
 }
