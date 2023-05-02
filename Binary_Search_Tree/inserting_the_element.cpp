@@ -82,7 +82,60 @@ void levelOrderTraversal(node *root)
         }
     }
 }
+node *deletethenode(node *root, int val)
+{
+    // base case
+    if (root == NULL)
+    {
+        return root;
+    }
+    if (root->data == val)
+    {
+        // 0 child
+        if (root->left == NULL && root->right == NULL)
+        {
+            delete root;
+            return NULL;
+        }
 
+        // 1 child
+
+        //// if left is thier
+        if (root->left && root->right == NULL)
+        {
+            node *temp = root->left;
+            delete root;
+            return temp;
+        }
+        //// if right is their
+        if (root->right && root->left == NULL)
+        {
+            node *temp = root->right;
+            delete root;
+            return temp;
+        }
+
+        // 2 child
+        if (root->right && root->left)
+        {
+            int minv = minval(root->right)->data;
+            root->data = minv; // copy or replace the value in it
+            root->right = deletethenode(root->right, minv);
+            return root;
+        }
+    }
+
+    else if (root->data > val)
+    {
+        root->left = deletethenode(root->left, val);
+        return root;
+    }
+    else
+    {
+        root->right = deletethenode(root->right, val);
+        return root;
+    }
+}
 node *minval(node *root)
 {
     node *temp = root;
@@ -108,6 +161,8 @@ int main()
     node *root = NULL;
     takeinput(root);
     levelOrderTraversal(root);
-
+    cout << minval(root)->data;
+    cout << deletethenode(root, 30);
+    levelOrderTraversal(root);
     return 0;
 }
